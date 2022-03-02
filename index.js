@@ -12,13 +12,15 @@ const timer = new Timer(
   durationInput,
   startButton,
   pauseButton,
-  (onStart = () => {
-    console.log("Timer started");
+  (onStart = (duration) => {
+    this.duration = duration;
   }),
-  (onTick = () => {
+  (onTick = (timeRemaining) => {
     console.log("Timer ticked");
-    currentOffset -= 50;
-    circle.setAttribute("stroke-dashoffset", currentOffset);
+    circle.setAttribute(
+      "stroke-dashoffset",
+      (perimeter * timeRemaining) / duration - perimeter
+    );
   }),
   (onComplete = () => {
     console.log("Timer complete");
